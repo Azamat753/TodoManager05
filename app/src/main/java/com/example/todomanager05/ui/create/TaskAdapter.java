@@ -49,7 +49,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             binding.titleTv.setText(model.title);
             binding.timeTv.setText(model.time);
             binding.leftColorV.setBackgroundColor(model.color);
-            Glide.with(binding.taskIm).load(R.drawable.ic_menu_camera).centerCrop().into(binding.taskIm);
+            Glide.with(binding.taskIm).load(model.image).centerCrop().into(binding.taskIm);
         }
     }
 }

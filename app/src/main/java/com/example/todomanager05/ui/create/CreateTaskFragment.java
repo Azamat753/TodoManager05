@@ -1,9 +1,14 @@
 package com.example.todomanager05.ui.create;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -17,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
+import com.bumptech.glide.Glide;
 import com.example.todomanager05.R;
 import com.example.todomanager05.databinding.FragmentCreateTaskBinding;
 import com.example.todomanager05.utils.Constants;
@@ -31,6 +37,8 @@ public class CreateTaskFragment extends Fragment {
     String userTask;
     String userChoosedDate;
     String time;
+    String image;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -56,13 +64,29 @@ public class CreateTaskFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 userTask = binding.taskEd.getText().toString();
-                TaskModel model = new TaskModel(R.color.purple_200,userTask,userChoosedDate +"/"+time,"https://static.wikia.nocookie.net/naruto/images/d/dd/Naruto_Uzumaki%21%21.png/revision/latest?cb=20170816203155&path-prefix=ru");
+                TaskModel model = new TaskModel(R.color.purple_200, userTask, userChoosedDate + "/" + time, image);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(Constants.USER_TASK, model);
                 navController.navigate(R.id.nav_home, bundle);
             }
         });
+        binding.addImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mGetContent.launch("image/*");
+            }
+        });
     }
+
+    ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
+            new ActivityResultCallback<Uri>() {
+                @Override
+                public void onActivityResult(Uri uri) {
+                    image = uri.toString();
+                    Glide.with(binding.imageView).load(image).centerCrop().into(binding.imageView);
+                }
+            });
+
     public void showDateTimePicker() {
         final Calendar currentDate = Calendar.getInstance();
 
@@ -72,14 +96,15 @@ public class CreateTaskFragment extends Fragment {
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 date.set(year, monthOfYear, dayOfMonth);
                 new TimePickerDialog(requireContext(), new TimePickerDialog.OnTimeSetListener() {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         date.set(Calendar.HOUR_OF_DAY, hourOfDay);
                         date.set(Calendar.MINUTE, minute);
-                        time = hourOfDay+" : "+minute;
-                        userChoosedDate= date.get(Calendar.MONTH)+"." +date.get(Calendar.DAY_OF_MONTH);
+                        time = hourOfDay + " : " + minute;
+                        userChoosedDate = date.get(Calendar.MONTH) + "." + date.get(Calendar.DAY_OF_MONTH);
 
-                        Log.v("ololo", "The choosen one " + date.getTime());
+                        binding.timeTv.setText(userChoosedDate + "/" + time);
                     }
                 }, currentDate.get(Calendar.HOUR_OF_DAY), currentDate.get(Calendar.MINUTE), false).show();
             }
