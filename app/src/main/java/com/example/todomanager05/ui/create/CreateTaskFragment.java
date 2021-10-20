@@ -75,7 +75,7 @@ public class CreateTaskFragment extends Fragment {
             public void onClick(View view) {
                 mGetContent.launch("image/*");
             }
-        });
+        }); 
     }
 
     ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
