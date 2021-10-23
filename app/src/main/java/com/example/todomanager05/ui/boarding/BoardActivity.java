@@ -35,5 +35,6 @@ public class BoardActivity extends AppCompatActivity {
 
     private void initViewPager() {
         binding.viewPagerBoard.setAdapter(new BoardAdapter(getSupportFragmentManager()));
+        binding.wormDotsIndicator.setViewPager(binding.viewPagerBoard);
     }
 }
