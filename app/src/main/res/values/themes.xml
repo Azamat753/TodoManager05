@@ -22,4 +22,20 @@
     <style name="Theme.TodoManager05.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.TodoManager05.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="styleTextViewBoarding">
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="styleButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:background">@android:color/holo_blue_light</item>
+    </style>
+
 </resources>

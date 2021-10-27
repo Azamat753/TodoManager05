@@ -20,10 +20,9 @@
 
     <Button
         android:id="@+id/set_time_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/styleButton"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="Установить время"
+        android:text="@string/set_time"
         app:layout_constraintTop_toBottomOf="@id/task_ed" />
 
     <TextView
@@ -40,12 +39,11 @@
         android:textSize="20sp"/>
 
     <Button
+        android:layout_marginTop="12dp"
         android:id="@+id/add_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/styleButton"
         app:layout_constraintTop_toBottomOf="@id/set_time_btn"
-        android:textAllCaps="false"
-        android:text="Добавить картинку"
+        android:text="@string/add_image"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <ImageView

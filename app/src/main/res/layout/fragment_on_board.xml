@@ -12,26 +12,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/holo_orange_light"
-        android:text="Пропустить"
+        android:text="@string/pass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/board_image"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_marginTop="16dp"
-        android:src="@mipmap/ic_launcher"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/skip_btn" />
+        app:layout_constraintTop_toBottomOf="@id/skip_btn"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="tasks.json"
+        app:lottie_loop="true" />
 
     <TextView
         android:id="@+id/title_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="some title about app"
+        style="@style/styleTextViewBoarding"
+        android:text="@string/some_title_about_app"
         android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -41,9 +41,8 @@
 
     <TextView
         android:id="@+id/description_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="description about app"
+        style="@style/styleTextViewBoarding"
+        android:text="@string/description_about_app"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,12 +50,12 @@
 
     <Button
         android:id="@+id/start_btn"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Старт"
+        android:text="@string/start"
         android:textSize="20sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/description_tv" />

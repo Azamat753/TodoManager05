@@ -10,6 +10,11 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pass">Пропустить</string>
+    <string name="start">Старт</string>
+    <string name="some_title_about_app">some title about app</string>
+    <string name="description_about_app">description about app</string>
+    <string name="set_time">Установить время</string>
+    <string name="add_image">Добавить картинку</string>
 </resources>
