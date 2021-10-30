@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp"
+    tools:context=".auth.SigningActivity">
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"
+        android:layout_marginTop="12dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <EditText
+        android:id="@+id/code_ed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:hint="Смс-код"
+        android:textColor="@android:color/darker_gray" />
+
+    <EditText
+        android:id="@+id/number_ed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:hint="Номер телефона"
+        android:textColor="@android:color/darker_gray" />
+
+    <Button
+        android:id="@+id/apply_code_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Получить код" />
+
+    <Button
+        android:id="@+id/apply_number_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Подтвердить код" />
+</LinearLayout>
