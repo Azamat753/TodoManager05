@@ -27,6 +27,10 @@ import com.example.todomanager05.R;
 import com.example.todomanager05.databinding.FragmentCreateTaskBinding;
 import com.example.todomanager05.utils.App;
 import com.example.todomanager05.utils.Constants;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -41,6 +45,7 @@ public class CreateTaskFragment extends Fragment {
     String time;
     String image;
     List<TaskModel> list;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,6 +75,14 @@ public class CreateTaskFragment extends Fragment {
                 TaskModel model = new TaskModel(R.color.purple_200, userTask, userChoosedDate + "/" + time, image);
 
                 App.getInstance().getDataBase().taskDao().insert(model);
+                db.collection(Constants.COLLECTION_DATA).add(model).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<DocumentReference> task) {
+                        if (task.isSuccessful()) {
+                            Log.e("ololo", "onComplete: " + task.getResult().getId());
+                        }
+                    }
+                });
                 navController.navigate(R.id.nav_home);
             }
         });

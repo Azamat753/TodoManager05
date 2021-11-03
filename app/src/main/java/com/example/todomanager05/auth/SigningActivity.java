@@ -29,10 +29,8 @@ import java.util.concurrent.TimeUnit;
 public class SigningActivity extends AppCompatActivity {
     private static final String TAG = "PhoneAuthActivity";
 
-    // [START declare_auth]
     private FirebaseAuth mAuth;
     private ActivitySigningBinding binding;
-    // [END declare_auth]
 
     private String mVerificationId;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
@@ -45,23 +43,11 @@ public class SigningActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         initClickers();
-        // [START initialize_auth]
-        // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-        // [END initialize_auth]
-
-        // Initialize phone auth callbacks
-        // [START phone_auth_callbacks]
         mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
             @Override
             public void onVerificationCompleted(PhoneAuthCredential credential) {
-                // This callback will be invoked in two situations:
-                // 1 - Instant verification. In some cases the phone number can be instantly
-                //     verified without needing to send or enter a verification code.
-                // 2 - Auto-retrieval. On some devices Google Play services can automatically
-                //     detect the incoming verification SMS and perform verification without
-                //     user action.
                 Log.d(TAG, "onVerificationCompleted:" + credential);
 
                 signInWithPhoneAuthCredential(credential);
@@ -144,28 +130,6 @@ public class SigningActivity extends AppCompatActivity {
         // [END start_phone_auth]
     }
 
-    private void verifyPhoneNumberWithCode(String verificationId, String code) {
-        // [START verify_with_code]
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
-        // [END verify_with_code]
-    }
-
-    // [START resend_verification]
-    private void resendVerificationCode(String phoneNumber,
-                                        PhoneAuthProvider.ForceResendingToken token) {
-        PhoneAuthOptions options =
-                PhoneAuthOptions.newBuilder(mAuth)
-                        .setPhoneNumber(phoneNumber)       // Phone number to verify
-                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-                        .setActivity(this)                 // Activity (for callback binding)
-                        .setCallbacks(mCallbacks)          // OnVerificationStateChangedCallbacks
-                        .setForceResendingToken(token)     // ForceResendingToken from callbacks
-                        .build();
-        PhoneAuthProvider.verifyPhoneNumber(options);
-    }
-    // [END resend_verification]
-
-    // [START sign_in_with_phone]
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -187,7 +151,6 @@ public class SigningActivity extends AppCompatActivity {
                     }
                 });
     }
-    // [END sign_in_with_phone]
 
     private void updateUI(FirebaseUser user) {
 
