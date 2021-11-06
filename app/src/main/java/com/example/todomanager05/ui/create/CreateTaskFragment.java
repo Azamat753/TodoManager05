@@ -31,6 +31,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -101,8 +104,16 @@ public class CreateTaskFragment extends Fragment {
                 public void onActivityResult(Uri uri) {
                     image = uri.toString();
                     Glide.with(binding.imageView).load(image).centerCrop().into(binding.imageView);
+                    uploadImage(image);
                 }
             });
+
+    private void uploadImage(String imageUrl) {
+        if (image != null) {
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(imageUrl);
+            storageReference.putFile(Uri.parse(imageUrl));
+        }
+    }
 
     public void showDateTimePicker() {
         final Calendar currentDate = Calendar.getInstance();

@@ -1,6 +1,7 @@
 package com.example.todomanager05.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +59,8 @@ public class HomeFragment extends Fragment {
     private void initAdapter() {
         adapter = new TaskAdapter(getDataFromDataBase());
         binding.taskRecycler.setAdapter(adapter);
+        Log.e("ololo", "initAdapter: "+adapter );
+        Log.w("ololo", "initAdapter: "+binding.fab );
     }
 
 
